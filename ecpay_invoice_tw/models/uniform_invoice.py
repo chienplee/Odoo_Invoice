@@ -172,6 +172,7 @@ class UniformInvoice(models.Model):
         parameters['ItemRemark'] = sItemRemark  # 商品備註
 
         del parameters['Items']
+        del parameters['ZeroTaxRateReason']
         return parameters
 
     def split_order_line(self):
