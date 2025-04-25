@@ -172,7 +172,9 @@ class UniformInvoice(models.Model):
         parameters['ItemRemark'] = sItemRemark  # 商品備註
 
         del parameters['Items']
-        del parameters['ZeroTaxRateReason']
+        # Some ECPay responses (before 2025 Q2) may not include ZeroTaxRateReason
+        if 'ZeroTaxRateReason' in parameters:
+            del parameters['ZeroTaxRateReason']
         return parameters
 
     def split_order_line(self):
